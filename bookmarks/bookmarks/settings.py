@@ -77,8 +77,15 @@ WSGI_APPLICATION = 'bookmarks.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'account',
+        'USER':'accounts',
+        'PASSWORD':'vincent45',
+        'HOST':'localhost',
+        'PORT':'',
+        
+        
     }
 }
 
@@ -123,3 +130,11 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+LOGIN_REDIRECT_URL  = 'dashboard'
+#Tells django which  URL  to  redirect the user  to after a sucessful login if no next paramater is present in request
+LOGIN_URL  = 'login'
+#redirects user to log in
+LOGOUT_URL  ='logout'
+#URL to redirect     user to logout

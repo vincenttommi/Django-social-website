@@ -2,6 +2,7 @@ from django.http import  HttpResponse
 from django.shortcuts  import render
 from django.contrib.auth import  authenticate, login
 from .forms import LoginForm
+from django.contrib.auth.decorators import login_required
 
 
 
@@ -43,8 +44,14 @@ parameters and returns the User object if the user has been successfully authent
 
 
 
+#
 
 
 
 
-
+#creating a view to  display a dashboard  when users log into their accounts
+@login_required
+#checks wether the current user is authenticated
+def dashboard(request):
+    return render(request, 'account/dashboard.html',{'section':'dashboard'})
+# a dashboard view and a decorator  of django  authenticartion framework
