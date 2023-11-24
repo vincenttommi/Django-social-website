@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block title  %}Log-in{% endblock %}
+
+{%  block content %}
+<h1>Log-in</h1>
+{% comment %} introducing if statements {% endcomment %}
+
+{%  if form.errors %}
+{% comment %} We use {% if form.errors %} in the template
+to check whether the credentials provided are wrong. {% endcomment %}
+   <p>
+   Your name and password didn't match.
+   Please try again
+   </p>
+{% else %} 
+<p>Please, use the following  form to  log-in  </p>
+{% endif %}
+<div  class="login-form">
+    <form  action="{%  url  'login'%}" method="post">
+        {{form.as_p}}
+        {% comment %}Renders Django forms as a paragraph {% endcomment %}
+         {% csrf_token %}  
+         {% comment %} prevents crossite forgeries {% endcomment %}
+
+
+         <input  type="hidden" name="next" value="{{ next }}">
+         <p><input typ="submit" value="Log-in"></p>
+    </form>
+</div>
+
+{%  endblock %}
