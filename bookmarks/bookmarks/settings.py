@@ -130,3 +130,9 @@ LOGOUT_URL  ='logout'
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 #Configuring  a Simple  Mail Transfer Protocol  that would be used to  send emails
+
+
+MEDIA_URL = 'media/'
+#is the base URL used to  serve  the media files  uploaded by  users.
+MEDIA_ROOT = BASE_DIR / 'media'
+#is the local path where media files reside
