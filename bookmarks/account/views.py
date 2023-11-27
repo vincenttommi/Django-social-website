@@ -1,7 +1,7 @@
 from django.http import  HttpResponse
 from django.shortcuts  import render
 from django.contrib.auth import  authenticate, login
-from .forms import LoginForm
+from .forms import LoginForm,UserRegistrationForm
 from django.contrib.auth.decorators import login_required
 
 
@@ -55,3 +55,38 @@ parameters and returns the User object if the user has been successfully authent
 def dashboard(request):
     return render(request, 'account/dashboard.html',{'section':'dashboard'})
 # a dashboard view and a decorator  of django  authenticartion framework
+
+
+
+
+
+
+#function that handles user registration
+#view function is named register  and takes  a request object as a parameter
+def register(request):
+    # Check if the request method is 'POST', indicating that the user has submitted the form
+    if request.method == 'POST':
+        # If the request method is POST, create a 'UserRegistrationForm' instance with data from the POST request
+        user_form = UserRegistrationForm(request.POST)
+        
+        # Check if the user_form is valid; if valid, proceed to create a new object without saving it immediately using commit=False
+        if user_form.is_valid():
+            new_user = user_form.save(commit=False)
+            
+            # Set the chosen password
+            new_user.set_password(user_form.cleaned_data['password'])
+            
+            # The password for the new user is set using 'new_user.set_password()'; it is necessary when creating a new user in Django,
+            # as it ensures the password is properly hashed
+            new_user.save()
+            
+            # The new user object is then saved to the database using new_user.save()
+            return render(request, 'account/register_done.html', {'new_user': new_user})
+    else:
+        # If the form is not valid, create a new instance of 'UserRegistrationForm'
+        user_form = UserRegistrationForm()
+
+    # Render the registration form template with the user_form as context
+    return render(request,  'account/register.html', {'user_form': user_form})
+
+    
