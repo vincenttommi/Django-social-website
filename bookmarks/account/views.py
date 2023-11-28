@@ -4,7 +4,7 @@ from django.contrib.auth import  authenticate, login
 from .forms import LoginForm,UserRegistrationForm,UserEditForm,ProfileEditForm
 from django.contrib.auth.decorators import login_required
 from . models import  Profile
-
+from django.contrib  import  messages
 
 
 
@@ -118,6 +118,11 @@ def edit(request):
             profile_form.save()
             #if both forms contain valid data  we both forms by  calling  save() method to update corresponding 
             #objects in database
+            messages.success(request,'Profile updated successfully')
+        else:
+            messages.error(request, 'Error updating your profile')
+            #a success message is generated when users successfullyupdate their profile,if any of the forms contain
+            #invalid data, an error is generated instead
     else:
          user_form  = UserEditForm(instance=request.user)
          profile_form  = ProfileEditForm(
