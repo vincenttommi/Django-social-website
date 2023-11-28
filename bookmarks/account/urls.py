@@ -30,6 +30,8 @@ urlpatterns = [
      path('',  views.dashboard, name='dashboard'),
     #registering register view
      path('register/', views.register, name='register'),
+    #registering edit view
+     path('edit/', views.edit, name='edit'),
     
 ]
 

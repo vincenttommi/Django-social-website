@@ -1,8 +1,9 @@
 from django.http import  HttpResponse
 from django.shortcuts  import render
 from django.contrib.auth import  authenticate, login
-from .forms import LoginForm,UserRegistrationForm
+from .forms import LoginForm,UserRegistrationForm,UserEditForm,ProfileEditForm
 from django.contrib.auth.decorators import login_required
+from . models import  Profile
 
 
 
@@ -80,6 +81,12 @@ def register(request):
             # as it ensures the password is properly hashed
             new_user.save()
             
+            
+            #Creating the user  profile
+            Profile.objects.create(user=new_user)
+            #when users registered on site a Profile object will be created and associated 
+            #with user object created
+            
             # The new user object is then saved to the database using new_user.save()
             return render(request, 'account/register_done.html', {'new_user': new_user})
     else:
@@ -89,4 +96,31 @@ def register(request):
     # Render the registration form template with the user_form as context
     return render(request,  'account/register.html', {'user_form': user_form})
 
-    
+
+#added  login_required decorator to view to allow authenticated users  be able to  edit their profiles
+@login_required
+def edit(request):
+    if request.method  == 'POST':
+        #if the requested method is post creates and instance of  from object UserEditForm and POST it
+        
+        user_form = UserEditForm(instance=request.user, data=request.POST)
+        
+              
+#for this view we use two model forms UserEditForm to store the  data  of built-in User model
+#and ProfileEditForm to store  additional personal data in custom Profile Model
+        profile_form  = ProfileEditForm(
+            instance = request.user.profile,
+            data  = request.POST,
+            files  = request.FILES)
+        if user_form.is_valid() and profile_form.is_valid():
+            #To validate data we u call is_valid() method  of both forms
+            user_form.save()
+            profile_form.save()
+            #if both forms contain valid data  we both forms by  calling  save() method to update corresponding 
+            #objects in database
+    else:
+         user_form  = UserEditForm(instance=request.user)
+         profile_form  = ProfileEditForm(
+             instance=request.user.profile) 
+    return render(request, 'account/edit.html', {'user_form':user_form, 'profile_form':profile_form}) 
+            

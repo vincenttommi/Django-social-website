@@ -1,5 +1,6 @@
 from django import forms
 from django.contrib.auth.models import  User
+from .models import Profile
 
 class LoginForm(forms.Form):
     username  = forms.CharField()
@@ -34,7 +35,34 @@ and raise an error  if the password  don't match
 This method is executed when  form is validated by calling its  is_valid()method
 
 """ 
-           
+
+class UserEditForm(forms.ModelForm):
+    class Meta:
+        model = User
+        fields  = ['first_name','last_name', 'email'] 
+
+
+#This will allow users to edit their first_name ,lastname and email which are attributes of built 
+#in django User model 
+        
+
+
+
+class ProfileEditForm(forms.ModelForm):
+    class Meta:
+        model = Profile
+        fields  = ['date_of_birth', 'photo']
+# This  will allow  users to edit the profile data that is saved  in custom profile model
+#Users will be able to  edit their  date of birth and upload  image  for their  profile picture
+
+        
+ 
+ 
+ 
+                   
+        
+
+                                   
               
       
       
