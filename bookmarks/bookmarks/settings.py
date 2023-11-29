@@ -136,3 +136,14 @@ MEDIA_URL = 'media/'
 #is the base URL used to  serve  the media files  uploaded by  users.
 MEDIA_ROOT = BASE_DIR / 'media'
 #is the local path where media files reside
+
+
+
+AUTHENTICATION_BACKENDS  = [
+    'django.contrib.auth.backends.ModelBackend',
+    'account.authentication.EmailAuthBackend',  
+]
+
+#In preceding settings, we keep the default ModleBackend  that is used to authenticate  with
+# username and password  and including  my own email-authentication backend EmailAuthBackend.
+
