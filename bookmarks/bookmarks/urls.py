@@ -9,7 +9,9 @@ urlpatterns = [
     
     path('admin/', admin.site.urls),
     path('account/', include('account.urls')),
-    
+    path('social-auth/', include('social_django.urls', namespace='social'))
+    #adding social authentication to the projects that allows users to authenticate with
+    #Facebook,Twitter and Google backends
 ]
 
 

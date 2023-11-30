@@ -13,7 +13,7 @@ SECRET_KEY = 'django-insecure-7w-cyxgz4s#-y)^0*_m12glh*cn_wv*1&d4_!00mknf8a2t)#+
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['mysite.com', 'localhost', '127.0.0.1']
 
 
 # Application definition
@@ -27,6 +27,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'social_django',
+    'django_extensions'
 ]
 
 MIDDLEWARE = [
@@ -143,7 +145,10 @@ AUTHENTICATION_BACKENDS  = [
     'django.contrib.auth.backends.ModelBackend',
     'account.authentication.EmailAuthBackend',  
 ]
+"""
 
-#In preceding settings, we keep the default ModleBackend  that is used to authenticate  with
-# username and password  and including  my own email-authentication backend EmailAuthBackend.
+
+The User credentials will be checked using ModelBackend, and if no user is returned,
+the credentials will be  checked using EmailAuthBackend
+"""
 
