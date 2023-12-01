@@ -7,5 +7,22 @@
     {{form.as_p}}
     {% csrf_token %}
     <p><input type="submit" value="Log in"></p>
-</form>    
+</form>  
+
+{% comment %} <div class="social">
+     <ul>
+       <li>
+         <a  href="{%  url "social:begin" "facebook" %}">
+           Sign in with Facebook
+         </a>
+       </li>
+     </ul>
+</div> {% endcomment %}
+<h2>Login via Twitter</h2>
+{% for backend in backends %}
+    <a href="{% url 'social:begin' backend=backend.backend_name %}">Login with {{ backend.name }}</a><br>
+{% endfor %}
+
+
+
 {%  endblock %}

@@ -13,7 +13,8 @@ SECRET_KEY = 'django-insecure-7w-cyxgz4s#-y)^0*_m12glh*cn_wv*1&d4_!00mknf8a2t)#+
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['mysite.com', 'localhost', '127.0.0.1']
+ALLOWED_HOSTS = ['mysite.com', 'localhost', '127.0.0.1', 'd84b-41-209-10-84.ngrok-free.app']
+
 
 
 # Application definition
@@ -29,6 +30,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'social_django',
     'django_extensions'
+    'images.apps.ImagesConfig',
 ]
 
 MIDDLEWARE = [
@@ -144,6 +146,9 @@ MEDIA_ROOT = BASE_DIR / 'media'
 AUTHENTICATION_BACKENDS  = [
     'django.contrib.auth.backends.ModelBackend',
     'account.authentication.EmailAuthBackend',  
+    #implementing social Authentication in Django
+    'social_core.backends.facebook.FacebookOAuth2',
+     'social_core.backends.twitter.TwitterOAuth',
 ]
 """
 
@@ -152,3 +157,10 @@ The User credentials will be checked using ModelBackend, and if no user is retur
 the credentials will be  checked using EmailAuthBackend
 """
 
+SOCIAL_AUTH_FACEBOOK_KEY = '2310894922450816'
+SOCIAL_AUTH_FACEBOOK_SECRET  = 'd2ba9f52edacd52a82046dfe27665b1b'
+
+SOCIAL_AUTH_FACEBOOK_SCOPE = ['email']
+
+SOCIAL_AUTH_TWITTER_KEY = 'dCtvk06bck7agVgr70u4pfnSK'
+SOCIAL_AUTH_FACEBOOK_SECRET = 'W5nHniZ3aovko7BniPPkaLBkEJwDkn1GVVtmLA7zrbosjuWFhl'
