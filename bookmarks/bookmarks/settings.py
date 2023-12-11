@@ -165,3 +165,9 @@ SOCIAL_AUTH_FACEBOOK_SCOPE = ['email']
 
 SOCIAL_AUTH_TWITTER_KEY = 'dCtvk06bck7agVgr70u4pfnSK'
 SOCIAL_AUTH_FACEBOOK_SECRET = 'W5nHniZ3aovko7BniPPkaLBkEJwDkn1GVVtmLA7zrbosjuWFhl'
+
+if DEBUG:
+     import mimetypes
+     mimetypes.add_type('application/javascript', '.js',True)
+     mimetypes.add_type('text/css', '.css', True)
+     
