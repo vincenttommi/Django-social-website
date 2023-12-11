@@ -13,7 +13,9 @@ class Image(models.Model):
     slug = models.SlugField(max_length=200, blank=True)
     # A short label that contains only letters, numbers, underscores, or hyphens 
     # to be used for building beautiful SEO-friendly URLs.
-
+      
+    url = models.SlugField(max_length=2000) 
+      
     image = models.ImageField(upload_to='images/%Y/%m/%d/')
     # The image file.
 

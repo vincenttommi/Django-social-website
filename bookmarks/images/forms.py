@@ -8,9 +8,9 @@ class ImageCreateForm(forms.ModelForm):
     class Meta:
         model  = Image
         fields  = ['title','url','description']
-        widgets  = {
-            'url': forms.HiddenInput,
-        }
+        # widgets  = {
+        #     'url':forms.HiddenInput,
+        # }
     #defined a model form from Image model, including only the title,url,and description fields 
     #users will not enter  the image URL directly in the form
     def  clean_url(self):

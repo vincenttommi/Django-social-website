@@ -32,7 +32,7 @@ urlpatterns = [
      path('register/', views.register, name='register'),
     #registering edit view
      path('edit/', views.edit, name='edit'),
-     path('auth/', include('social_django.urls', namespace='social'))
+     
     
 ]
 
