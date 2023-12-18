@@ -13,6 +13,7 @@ head.appendChild(link);
 
 // Load HTML
 var body = document.getElementsByTagName('body')[0];
+   console.log('body')
 var boxHtml = `
     <div id="bookmarklet">
         <a href="#" id="close">&times;</a>
@@ -53,4 +54,67 @@ images.forEach(image => {
 });
 
 // Calling bookmarkletLaunch() again (not sure why it's called twice in your code)
+
+
+
+//function for users to bookmark desired image
+
+function bookmarkletLaunch(){
+    bookmarklet =  document.getElementById('bookmarklet');
+    var  imagesFound  = bookmarklet.querySelector('.images');
+
+    //clear images found
+    imagesFound.innerHTML  = ''
+
+    //display bookmarklet
+    bookmarklet.style.display = 'block';
+
+
+    //close event
+    bookmarklet.querySelector('#close')
+           .addEventListener('click', function(){
+            bookmarklet.style.display = 'none'
+           })
+
+
+
+     //find images  in the DOM with minimum dimensions
+     
+     images  = document.querySelectorAll('img[src$=".jpg"], img[src$=".jpeg"],img[src$=".png"]');
+          images.forEach(image => {
+           if(image.naturalWidth >= minWidth && image.naturalHeight >= minHeight)
+           {
+           
+            
+            var imagesFound  = document.createElement('img');
+            imagesFound.src = image.src;
+            imagesFound.append(imagesFound);
+
+
+
+
+           }
+          })
+
+
+}
+
+//select image event
+
+imagesFound.querySelectorAll('img').forEach(image => {
+
+    image.addEventListener('click', function(event)
+    {
+
+        imageSelected  = eval.target;
+        bookmarklet.style.display  = 'none';
+
+        window.open(siteUrl + 'images/create/?url='+ encodeURIComponent(imageSelected.src)
+        + '&title=' 
+        + encodeURIComponent(document.title),
+        '_blank');
+    })
+});
+
+
 bookmarkletLaunch();
